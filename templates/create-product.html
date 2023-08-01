@@ -1,0 +1,13 @@
+{% extends 'layout/main.html' %}
+{% load crispy_forms_tags %}
+{% block title %}Create Products{% endblock title %}
+
+{% block content %}
+    <div class="container mt-5">
+        <form action="" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{form|crispy}}
+            <input type="submit" class="btn btn-info" value="Add Product">
+        </form>
+    </div>
+{% endblock content %}

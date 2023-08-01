@@ -1,0 +1,28 @@
+{% extends 'layout/main.html' %}
+{% block content %}
+
+<h2 class="text-center">Search Result :: {{query}}</h2>
+<hr>
+<div class="container mt-5">
+    <div class="row">
+       {% if products %}
+        {% for product in products %}
+            <div class="col-md-4 mt-4">
+                <div class="card">
+                    <img src="{{product.image.url}}" class="card-img-top" alt="..." style="height:300px">
+                    <div class="card-body">
+                    <h5 class="card-title">{{product.name}}</h5>
+                    <p class="card-text">{{product.price}} $</p>
+                    <a href="#" class="btn btn-primary btn-sm">View</a>
+                    <a href="{% url 'UpdateProduct' product.id %}" class="btn btn-info btn-sm">Edit</a>
+                    <a href="{% url 'DeleteProduct' product.id %}" class="btn btn-danger btn-sm">Delete</a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+        {% else %}
+            <h3>No Result!</h3>
+       {% endif %}
+    </div>
+</div>
+{% endblock content %}

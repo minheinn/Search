@@ -1,0 +1,24 @@
+{% extends 'layout/main.html' %}
+{% block title %}Show Products{% endblock title %}
+
+{% block content %}
+    <div class="container mt-5">
+        <div class="row">
+            {% for product in products %}
+                <div class="col-md-4 mt-4">
+                    <div class="card">
+                        <img src="{{product.image.url}}" class="card-img-top" alt="..." style="height:300px">
+                        <div class="card-body">
+                        <h5 class="card-title">{{product.name}}</h5>
+                        <p class="card-text">{{product.price}} $</p>
+                        <p class="card-text">{{product.created_at}} </p>
+                        <a href="#" class="btn btn-primary btn-sm">View</a>
+                        <a href="{% url 'UpdateProduct' product.id %}" class="btn btn-info btn-sm">Edit</a>
+                        <a href="{% url 'DeleteProduct' product.id %}" class="btn btn-danger btn-sm">Delete</a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock content %}

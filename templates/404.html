@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static '404.css' %}" />
+
+    <!-- bootstrap -->
+  <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}" />
+
+    <title>Not Found</title>
+    
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        body {
+            background: linear-gradient(45deg, #8500ff, #5acaff);
+            height: 100vh;
+        }
+        
+        #container {
+            position: absolute;
+            top: 10%;
+            left: 10%;
+            right: 10%;
+            bottom: 10%;
+            border-radius: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: url('p404.png'), #151729;
+            box-shadow: 0 15px 30px rgba(0,0,0,.5);
+        }
+        #container .content {
+            text-align:center;
+            color:white;
+        }
+        #container .content h2 {
+            font-size:200px;
+        }
+        #container .content h4 {
+            font-size: 40px;
+            padding-bottom: 10px;
+        }
+        #container .content p {
+            padding-bottom: 10px;
+        }
+
+    </style>
+</head>
+<body>
+    <div id="container">
+        <div class="content">
+            <h2>404</h2>
+            <h4>Opps! Page not found</h4>
+            <p>The page you were looking for doesn't exist. You may have mistyped the address or the page may have moved.</p>
+            <a href="{% url 'ShowProduct' %}" class="btn btn-primary btn-sm">Back To Home</a>
+        </div>
+    </div>
+</body>
+</html>

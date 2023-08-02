@@ -5,7 +5,7 @@ from django.db.models import Q
 
 # Create your views here.
 def showProduct(request):
-    products = Product.objects.all()
+    products = Product.objects.filter().order_by('-created_at')
     context = {'products':products}
     return render(request, 'show-product.html', context)
 

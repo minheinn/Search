@@ -19,8 +19,8 @@ def createProduct(request):
     context = {'form':form}
     return render(request, 'create-product.html', context)
 
-def updateProduct(request, pk):
-    product = Product.objects.get(id=pk)
+def updateProduct(request, slug):
+    product = Product.objects.get(slug=slug)
     form = ProductForm(instance=product)
     if request.method == "POST":
         form = ProductForm(request.POST, request.FILES, instance=product)
@@ -30,8 +30,8 @@ def updateProduct(request, pk):
     context = {'product':product, 'form':form}
     return render(request, 'update-product.html', context)
 
-def deleteProduct(request, pk):
-    product = Product.objects.get(id=pk)
+def deleteProduct(request, slug):
+    product = Product.objects.get(slug=slug)
     if request.method == "POST":
         product.delete()
         return redirect('ShowProduct')

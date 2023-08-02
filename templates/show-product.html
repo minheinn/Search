@@ -13,8 +13,8 @@
                         <p class="card-text">{{product.price}} $</p>
                         <p class="card-text">{{product.created_at}} </p>
                         <a href="#" class="btn btn-primary btn-sm">View</a>
-                        <a href="{% url 'UpdateProduct' product.id %}" class="btn btn-info btn-sm">Edit</a>
-                        <a href="{% url 'DeleteProduct' product.id %}" class="btn btn-danger btn-sm">Delete</a>
+                        <a href="{% url 'UpdateProduct' product.slug %}" class="btn btn-info btn-sm">Edit</a>
+                        <a href="{% url 'DeleteProduct' product.slug %}" class="btn btn-danger btn-sm">Delete</a>
                         </div>
                     </div>
                 </div>

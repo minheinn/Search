@@ -2,11 +2,15 @@ from django.shortcuts import render, redirect
 from . forms import ProductForm
 from . models import Product
 from django.db.models import Q
+from django.core.paginator import Paginator
 
 # Create your views here.
 def showProduct(request):
     products = Product.objects.filter().order_by('-created_at')
-    context = {'products':products}
+    paginator = Paginator(products, 3)
+    page_number = request.GET.get('page')
+    page = paginator.get_page(page_number)
+    context = {'page':page}
     return render(request, 'show-product.html', context)
 
 def createProduct(request):
@@ -39,11 +43,15 @@ def deleteProduct(request, slug):
     return render(request, 'delete-product.html', context)
 
 def search(request):
+    products = Product.objects.all()
     if request.method == "GET":
         query = request.GET.get('query')
-        if query:
-            products = Product.objects.filter(Q(name__icontains=query) | Q(price__icontains=query))
-            return render(request, 'layout/search.html', {'products':products, 'query':query})
-        else:
-            print("No information to show!")
-            return render(request, 'layout/search.html', {})
+        query_set = products.filter(Q(name__icontains=query) | Q(price__icontains=query))
+        
+        paginator = Paginator(query_set, 3)
+        page = request.GET.get('page')
+        page_number = request.GET.get('page')
+        page = paginator.get_page(page_number)
+            
+    return render(request, 'layout/search.html', { 'query':query, 'page':page})
+    

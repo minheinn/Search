@@ -5,15 +5,15 @@
 <hr>
 <div class="container mt-5">
     <div class="row">
-       {% if products %}
-        {% for product in products %}
+       {% if page %}
+        {% for product in page %}
             <div class="col-md-4 mt-4">
                 <div class="card">
                     <img src="{{product.image.url}}" class="card-img-top" alt="..." style="height:300px">
                     <div class="card-body">
                     <h5 class="card-title">{{product.name}}</h5>
                     <p class="card-text">{{product.price}} $</p>
-                    <a href="#" class="btn btn-primary btn-sm">View</a>
+                    <a href="" class="btn btn-primary btn-sm">View</a>
                     <a href="{% url 'UpdateProduct' product.id %}" class="btn btn-info btn-sm">Edit</a>
                     <a href="{% url 'DeleteProduct' product.id %}" class="btn btn-danger btn-sm">Delete</a>
                     </div>
@@ -24,5 +24,38 @@
             <h3>No Result!</h3>
        {% endif %}
     </div>
+    <!-- Pegination -->
+    <nav aria-label="Page navigation example" class=mt-5>
+        <ul class="pagination justify-content-center">
+            {% if page.has_previous %}
+                <li class="page-item">
+                    <a class="page-link" href="/search/?query={{query}}&page=1">First</a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" href="/search/?query={{query}}&page={{ page.previous_page_number }}">Previous</a>
+                </li>
+            {% endif %}
+            
+            {% for page_num in page.paginator.page_range %}
+                <br>
+                {% if page.number == page_num %}
+                    <li class="page-item active">
+                        <a class="page-link" href="/search/?query={{query}}&page={{ page_num }}">{{page_num}}</a>
+                    </li>
+                {% else %}
+                    <li class="page-item">
+                        <a class="page-link" href="/search/?query={{query}}&page={{ page_num }}">{{page_num}}</a>
+                    </li>
+                {% endif %}
+                <br>
+            {% endfor %}             
+                           
+            {% if page.has_next %}
+                <li class="page-item">
+                    <a class="page-link" href="/search/?query={{query}}&page={{ page.next_page_number }}">Next</a>
+                </li>
+            {% endif %}  
+        </ul>
+      </nav>
 </div>
 {% endblock content %}

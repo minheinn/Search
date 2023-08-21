@@ -23,6 +23,11 @@ def createProduct(request):
     context = {'form':form}
     return render(request, 'create-product.html', context)
 
+def viewProduct(request, slug):
+    product = Product.objects.get(slug=slug)
+    context = {'product':product}
+    return render(request, 'view-product.html', context)
+
 def updateProduct(request, slug):
     product = Product.objects.get(slug=slug)
     form = ProductForm(instance=product)

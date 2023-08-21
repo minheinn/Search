@@ -13,7 +13,7 @@
                     <div class="card-body">
                     <h5 class="card-title">{{product.name}}</h5>
                     <p class="card-text">{{product.price}} $</p>
-                    <a href="" class="btn btn-primary btn-sm">View</a>
+                    <a href="{% url 'ViewProduct' product.slug %}" class="btn btn-primary btn-sm">View</a>
                     <a href="{% url 'UpdateProduct' product.id %}" class="btn btn-info btn-sm">Edit</a>
                     <a href="{% url 'DeleteProduct' product.id %}" class="btn btn-danger btn-sm">Delete</a>
                     </div>
